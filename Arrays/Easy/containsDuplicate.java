@@ -1,3 +1,5 @@
+// neetcode 150 q1 
+
 class Solution {
     public boolean containsDuplicate(int[] nums) {
         /*
