@@ -53,7 +53,7 @@ public boolean searchMatrix(int[][] matrix, int target) {
         return false;
     }
 
-// Code - 360 (Using 2-D ArrayList)
+// Coding Ninjas Soln (Using 2-D ArrayList)
 
 static boolean searchMatrix(ArrayList<ArrayList<Integer>> mat, int target) {
         // Write your code here.
