@@ -47,3 +47,18 @@ public class Solution {
         return head;
     }
 }
+
+
+// why we use pos-1
+
+/*
+If you want to insert at pos = 3:
+
+    Using count < pos - 1:
+        The loop will stop when count == 2 (i.e., pos - 1).
+        At this point, temp is at the node with index 2, and you can insert the new node at position 3 by adjusting the next pointers.
+
+    Using count <= pos - 1:
+        The loop will stop when count == 3, meaning temp will now point to the node at position 3 instead of 2.
+        In this case, you’ve gone one node too far, and you won't be able to properly insert the new node at position 3.
+*/
