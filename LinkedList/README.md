@@ -329,3 +329,207 @@ A basic representation of a Linked List node looks like this:
       }
      }  
     }
+#### Delete kth element/position of LinkedList O(k)
+
+    public class Main {
+      static Node convertArrayToLL(int[] arr){
+        Node head = new Node(arr[0]);
+        Node mover = head;
+        for(int i = 1; i < arr.length; i++){
+          Node temp = new Node(arr[i]);
+          mover.next = temp;
+        mover = temp;
+      }  
+    return head;
+    }  
+  
+    static Node removePosition(Node head,int k){
+      if(head==null) return head;
+
+      if(k==1){ // deleting the head
+        Node temp = head;
+        head = head.next;
+        return head;
+      }
+
+    // for a no k 
+    int count = 0;
+    Node temp = head;
+    Node previous = null;
+    while(temp!=null && count < k){
+      previous = temp;
+      count++;
+      if(count == k){
+        previous.next = previous.next.next;
+        break;
+      }
+      temp = temp.next;
+    }
+    return head;
+    }
+
+    public static void main(String[] args) {
+
+      int [] arr = {1,2,3,4};
+      Node head = convertArrayToLL(arr);
+    
+      head = removePosition(head,1);
+      Node newTemp = head;
+      while(newTemp!=null){
+        System.out.println(newTemp.data + " ");
+        newTemp = newTemp.next;
+    }
+    }
+    }
+
+#### Delete a value of LinkedList O(k)
+
+in the above code do the following changes 
+
+     static Node removeValue(Node head,int value){
+        if(head==null) return head;
+
+    if(head.data == value){ ad
+      Node temp = head;
+      head = head.next;
+      return head;
+    }
+
+    // for a no k 
+    Node temp = head;
+    Node previous = null;
+    while(temp!=null){
+      previous = temp;
+      if(temp.data == value){
+        previous.next = previous.next.next;
+        return head;
+      }
+      temp = temp.next;
+    }
+    return head;
+    }
+
+### Insertion 
+
+#### Inserting New Head -: O(1)
+
+
+     static Node InsertHead(Node head , int val){
+        return new Node(val,head);
+      }
+  
+    public static void main(String[] args) {
+
+    int [] arr = {1,2,3,4};
+    Node head = convertArrayToLL(arr);
+    
+    head = InsertHead(head,100);
+    
+    Node newTemp = head;
+    while(newTemp!=null){
+      System.out.println(newTemp.data + " ");
+        newTemp = newTemp.next;
+      }
+    }  
+
+#### Inserting at the last/tail -: 
+
+    static Node InsertTail(Node head , int val){
+      Node temp = head;
+      if(head == null) return new Node(val);
+    
+      while(temp.next != null){
+        temp = temp.next;
+      }
+    // currently head is at last element 
+    
+      Node newNode = new Node(val);
+      temp.next = newNode;
+      return head;
+    }
+  
+    public static void main(String[] args) {
+
+    int [] arr = {1,2,3,4};
+    Node head = convertArrayToLL(arr);
+    
+    //head = InsertHead(head,100);
+    head = InsertTail(head,100);
+    
+    Node newTemp = head;
+    while(newTemp!=null){
+      System.out.println(newTemp.data + " ");
+        newTemp = newTemp.next;
+      }
+    }
+
+
+#### Inserting at a given position/element -: O(N) 
+
+    static Node InsertAtAPosition(Node head ,int position, int val){
+      Node temp = head;
+      if(head == null) return new Node(val);
+
+      if(position == 1){
+         return new Node(val,head);
+       }
+
+      int count = 0;
+      while(temp != null){
+        count++;
+        if(count == position-1){
+          Node newNode = new Node(val);
+          newNode.next = temp.next;
+          temp.next = newNode;
+          break;
+        }
+        temp =temp.next;
+      }  
+      return head;
+    }
+  
+    public static void main(String[] args) {
+
+    int [] arr = {1,2,3,4};
+    Node head = convertArrayToLL(arr);
+    
+    head = InsertAtAPosition(head,1,100);
+    
+    Node newTemp = head;
+    while(newTemp!=null){
+      System.out.println(newTemp.data + " ");
+        newTemp = newTemp.next;
+      }
+    }
+
+#### Inserting an value before the value x 
+
+    static Node InsertBeforeAValue(Node head ,int given_value, int val){
+      Node temp = head;
+      if(head == null) return null;
+
+      if(head.data == given_value) return new Node(val,head);
+
+      while(temp.next!=null){
+        if(temp.next.data == given_value){
+          Node newNode = new Node(val,temp.next);
+          temp.next = newNode;
+          break;
+        }
+      }
+      return head;
+    }
+  
+    public static void main(String[] args) {
+
+    int [] arr = {1,2,3,4};
+    Node head = convertArrayToLL(arr);
+    
+    head = InsertBeforeAValue(head,2,10); // insert 10 before 2 
+    
+    Node newTemp = head;
+    while(newTemp!=null){
+      System.out.println(newTemp.data + " ");
+        newTemp = newTemp.next;
+      }
+    }
