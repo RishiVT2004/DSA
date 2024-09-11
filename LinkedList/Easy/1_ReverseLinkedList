@@ -1,0 +1,67 @@
+/****************************************************************
+
+ Following is the class structure of the Node class:
+
+ class Node {
+     public int data;
+     public Node next;
+
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+     }
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+     }
+     Node(int data, Node next)
+     {
+         this.data = data;
+         this.next = next;
+     }
+ }
+
+ *****************************************************************/
+
+public class Solution
+{
+    public static Node reverseLinkedList(Node head)
+    {
+        // Write your code here.
+        Node currentHead = head;
+        Node previousHead = null;
+        Node nextHead = null;
+        while(currentHead != null){
+           nextHead = currentHead.next; //currentHead.next points towards nextHead initially
+           currentHead.next = previousHead; // points to null
+           previousHead = currentHead; // points towards currentHead
+           currentHead = nextHead;
+        }
+        return previousHead;
+    }
+
+    
+    O(N) time complexity , O(1) space compplexity
+
+    some errors / understanding 
+
+    1. initally i had currentHead = currentHead.next instead of nextHead , this is wrong as 
+    You are updating currHead incorrectly, as you're using currHead.next after already changing
+    it in the current iteration.
+    In the loop, you already store the next node in nextHead, so you should use nextHead to move forward to the next node instead of currHead.next.
+
+
+    2. why return prevHead and not head
+
+    you're returning the original head instead of the new head after the reversal.
+    When the linked list is reversed, the original head is no longer valid as the first node. 
+    The correct node to return is previousHead, which will be the new head of the reversed list.
+
+   * currentHead moves through the list, and each node’s next pointer is reversed.
+   * previousHead keeps track of the new head as we reverse the links.
+   * The loop ends when currentHead reaches the end of the list, and we return 
+     previousHead as the new head of the reversed list.
+    
+}
