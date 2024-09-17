@@ -34,9 +34,8 @@ A doubly linked list is one in which it is possible to access the next and the p
          this.prev = prev;
      }
  };
-
  *****************************************************************/
-
+  
 public class Solution
 {
     public static Node constructDLL(int []arr) {
@@ -47,9 +46,8 @@ public class Solution
         Node curr = head;
 
         for(int i = 1;i<arr.length ; i++){
-            Node nextNode = new Node(arr[i]);
+            Node nextNode = new Node(arr[i],null,curr);
             curr.next = nextNode;
-            nextNode.prev = curr;
             curr = nextNode;
         }
         return head;
