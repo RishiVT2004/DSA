@@ -1,23 +1,18 @@
-//Application of Lower Bound
-
-public class Solution {
-    public static int searchInsert(int [] arr, int x){
-        // Write your code here.
-               // we basically need to find the lower bound for the target 
-        // lowest mid for which arr[mid] >= index
-
-        int n = arr.length;
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int n = nums.length;
         int low = 0;
         int high = n-1;
-        int res = n;
+        int res = n; // if target is greater than any other no in array it goes to the last position
 
         while(low <= high){
-            int mid = (low + high)/2;
-            if(arr[mid] >= x){
+            int mid = (high+low)/2;
+
+            if(nums[mid] >= target){
                 res = mid;
-                high = mid - 1;
+                high = mid-1; // helps to track lower bound if target is not present
             }else{
-                low = mid + 1;
+                low = mid+1;
             }
         }
         return res;
