@@ -44,24 +44,23 @@ class Solution {
         Space -> O(s+t)
 
         // Using char count array method
-     if(s.length() != t.length()) return false;
+    class Solution {
+    public boolean isAnagram(String s, String t) {
+        if(s.length() != t.length()) return false;
 
-       int[] CharCount = new int[26]; // make a char array of size 26 (26 char in alphabet);
+        int[] CharCount = new int[26];
 
-       for(int i = 0;i<s.length();i++){
-         
+        for(int i = 0;i<s.length();i++){
             CharCount[s.charAt(i) - 'a']++;
-            CharCount[t.charAt(i) - 'a']--; // decreses the index count 
-       }
-         // if b is the char , 'b' - 'a' = 1 -> index 1 of array      charcount -> ++ -> value of index increrses with no of times charAt(i) is there 
-
-       //  if index count of all indexes = 0 => s,t are anagrams 
-
-        for(int value : CharCount){
-            if(value != 0){
-                return false;
-            }
+            CharCount[t.charAt(i) - 'a']--;
         }
+
+        for(int values : CharCount){
+            if(values != 0) return false;
+        }
+        return true;
+    }
+}
         return true;
         Space => O(n)
         Time => O(n)
