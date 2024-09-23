@@ -1,6 +1,6 @@
 
 class Solution {
-    public int[] twoSum(int[] nums, int target) {
+    public int[] twoSum(int[] numbers, int target) {
         /*
         // brute force approach 
 
@@ -20,18 +20,16 @@ class Solution {
 
         // Optimal Soln -> Binary search ( O(logN) time and O(1) space)
         int i = 0;
-        int j = nums.length - 1;
-        while(i < j){
-            if(nums[i] + nums[j] == target){
-                return new int[]{i+1 , j+1};
-            }
-            else if(nums[i] + nums[j] > target){
+        int j = numbers.length - 1;
+        while(i<j){
+            if(numbers[i] + numbers[j] == target){
+                return new int[]{i,j}; // in case if 1 indexed array , return i+1,j+1
+            }else if(numbers[i] + numbers[j] > target){
                 j--;
             }else{
                 i++;
             }
         }
+
         return new int[]{};
-      
-    }
 }
