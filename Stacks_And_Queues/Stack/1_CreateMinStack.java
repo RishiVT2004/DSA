@@ -1,63 +1,63 @@
 Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
 
-Implement the MinStack class:
+1. Push(num): Push the given number in the stack.
+2. Pop: Remove and return the top element from the stack if present, else return -1.
+3. Top: return the top element of the stack if present, else return -1.
+4. getMin: Returns minimum element of the stack if present, else return -1.
 
-MinStack() initializes the stack object.
-void push(int val) pushes the element val onto the stack.
-void pop() removes the element on the top of the stack.
-int top() gets the top element of the stack.
-int getMin() retrieves the minimum element in the stack.
-*** You must implement a solution with O(1) time complexity for each function.
+import java.util.* ;
+import java.io.*; 
+import java.util.Stack; 
 
-class MinStack {
-    // declaration
-    private Stack<Integer> Stack;
-    private Stack<Integer> Min;
+public class Solution {
 
-    // initialization
-    public MinStack() {
-        Stack = new Stack<>();
-        Min = new Stack<>();
-    }
-    
-    public void push(int val) {
-       
-       // no size constraint(synamic stack)
-        Stack.push(val);
-        // if min is empty or val <= min.peek() 
-        // to handle duplicate min 
-        if(Min.isEmpty() || val <= Min.peek()){
-            Min.push(val);
-        }
-    }
-    
-    public void pop() {
-        // if top of min == top of stack -> pop min[top]
-        int top = 0;
-        if(!Stack.isEmpty()){
-            top = Stack.peek();
-            Stack.pop();
+    static class MinStack {
+        Stack<Integer> stack;
+        Stack<Integer> min;
+        // Constructor
+        MinStack() {
+            stack = new Stack<>();
+            min = new Stack<>();
         }
 
-        if(top == (Min.peek())){
-            Min.pop();
+        // Function to add another element equal to num at the top of stack.
+        void push(int num){
+            stack.push(num);
+
+            if(min.isEmpty() || num <= min.peek()){
+                min.push(num);
+            }
         }
-    }
-    
-    public int top() {
-        return Stack.peek();
-    }
-    
-    public int getMin() {
-        return Min.peek();
+
+        // Function to remove the top element of the stack.
+        int pop() {
+
+            if(stack.isEmpty()) return -1;
+            
+            int top = stack.peek();
+            if(!stack.isEmpty()){
+                stack.pop();
+            }
+
+            if(top == min.peek()){
+                min.pop();
+            }
+            return top;
+        }
+
+        // Function to return the top element of stack if it is present. Otherwise
+        // return -1.
+        int top() {
+            if(stack.isEmpty()) return -1;
+
+            return stack.peek();
+        }
+
+        // Function to return minimum element of stack if it is present. Otherwise
+        // return -1.
+        int getMin() {
+            if(min.isEmpty()) return -1;
+            return min.peek();
+        }
     }
 }
-
-/**
- * Your MinStack object will be instantiated and called as such:
- * MinStack obj = new MinStack();
- * obj.push(val);
- * obj.pop();
- * int param_3 = obj.top();
- * int param_4 = obj.getMin();
- */
