@@ -62,3 +62,20 @@ If it is, we pop the stack and calculate how many days it took for a warmer temp
   
 Default answer array: Any day that doesn't have a future warmer day keeps its value as 0.
 (Since Java initializes arrays with 0 by default, all values in ans start as 0)
+
+
+  temp = [70,72,74,70,80]
+** res  = [1,1,2,1,0] ** 
+stack= [4]
+
+for(i = 0;i<n;i++){
+	while(!stack.isEmpty() && temp[stack.peek()] < temp[i]){
+		int index = stack.pop(); 
+    // index -> for index 'index' we have found a temp which is greater that temp[index]
+		// index = 0 , 1 , 3 , 2
+		// i = 1 , 2 , 4 , 4
+		int nextHighDay = i - index;
+		res[index] = nextHighDay;
+	}
+	stack.push(i);
+}
