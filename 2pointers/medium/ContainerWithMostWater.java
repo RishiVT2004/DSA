@@ -77,3 +77,29 @@ class Solution {
 		return MaxVolume;
 	}
 }
+
+alt soln : 
+	
+class Solution {
+    public int maxArea(int[] height) {
+       int n = height.length;
+       int l = 0;
+       int r = n-1;
+       int maxVol = 0;
+
+       if(n==0) return 0;
+       if(n==1) return height[0];
+
+        while(l < r){
+            int currVol = Math.min(height[l],height[r]) * (r-l);
+            maxVol = Math.max(currVol,maxVol);
+            if(height[l] < height[r]){
+                l++;
+            }else{
+                r--;
+            }
+        }
+       return maxVol;
+    }
+}
+	
