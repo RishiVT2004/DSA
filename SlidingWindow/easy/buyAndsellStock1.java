@@ -25,29 +25,33 @@ class Solution {
 
         // Optimal Solution -> Sliding Window Approach at O(n) time 
 
+       class Solution {
+    public int maxProfit(int[] prices) {
         int n = prices.length;
-        int leftPointer = 0;
-        int rightPointer = 1;
+        int left = 0;
+        int right = 1;
 
         int currProfit = 0;
         int maxProfit = 0;
 
-        while(rightPointer < n){
-            if(prices[leftPointer] < prices[rightPointer]){
-                currProfit = prices[rightPointer] - prices[leftPointer];
-                maxProfit = Math.max(currProfit,maxProfit);
+        while(right < n){
+            if(prices[left] < prices[right]){
+                currProfit = prices[right] - prices[left];
+                maxProfit = Math.max(maxProfit,currProfit);
             }else{
-                leftPointer = rightPointer;
+                left = right; 
+                /* using leftPointer = rightPointer; allows you to "jump" leftPointer directly to rightPointer, which is essential to reset 
+                the potential buying point to the latest low price when a new lower price is encountered. This approach optimally captures the potential 
+                for maximum profit.*/
             }
-            rightPointer++;
+            right++;
         }
+
         if(maxProfit <= 0) return 0;
 
         return maxProfit;
- 
     }
 }
-
 // description 
 
 /*
