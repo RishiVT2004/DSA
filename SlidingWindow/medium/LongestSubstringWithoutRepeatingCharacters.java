@@ -55,24 +55,27 @@ class Solution {
 
         // Optimal Soln -: 2 pointers (j-i -> repr length of curr substring)
  
-        Set<Character> set = new HashSet<>();
+       class Solution {
+   	 public int lengthOfLongestSubstring(String s) {
+        	int n = s.length();
+        	int i = 0;
+        	int j = 0;
+        	int maxSubstring = 0;
+        	HashSet<Character> set = new HashSet<>();
 
-		int n = s.length();
-		int i = 0;
-		int j = 0;
-		int max = 0;
-
-		while(j<n){
-			if(!(set.contains(s.charAt(j)))){
-				set.add(s.charAt(j));
-				j++;
-				max = Math.max(max,j-i);			
-			}else{
-				set.remove(s.charAt(i));
-				i++;
-			}
-		}
-		return max;
+        	while(j < n){
+            		if(!set.contains(s.charAt(j))){
+                	set.add(s.charAt(j));
+                	j++;
+                	maxSubstring = Math.max(max,j-i);// j-i -> track len of curr longest substring
+            	}else{
+                	set.remove(s.charAt(i));
+                	i++;
+            	}
+        	}
+        	return maxSubstring;
+    }
+}
 		// space , time -> O(n)
         /*
 
