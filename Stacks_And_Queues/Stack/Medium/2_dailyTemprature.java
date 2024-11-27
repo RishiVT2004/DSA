@@ -33,23 +33,43 @@ Output: [1,1,4,2,1,1,0,0]
     }
 }
 
-2. Correct Approach 
+2. initial approach ii (write but uses O(N2) complexity)
+	
+public int[] dailyTemperatures(int[] temp) {
+	int []arr = new int[temp.length];
+        for(int i = 0;i<temp.length-1;i++){
+            int count = 1;
+            for(int j = i+1;j<temp.length;j++){
+                if(temp[j]>temp[i]){
+                    arr[i] = count;
+                    break;
+                }else{
+                    count++;
+                }
+            }
+        }
+        return arr;
+}
+
+
+3. Correct Approach (O(N) time , O(N) space)
 
   class Solution {
     public int[] dailyTemperatures(int[] temp) {
-        Stack<Integer> stack = new Stack<Integer>();
-        int n = temp.length;
-        int[] ans = new int[n];
-
-
-        for(int i = 0;i<n;i++){
+        int l = temp.length;
+        Stack<Integer> stack = new Stack<>();
+        int []arr = new int[l];
+        for(int i = 0;i<l;i++){
             while(!stack.isEmpty() && temp[i] > temp[stack.peek()]){
-                int index = stack.pop();
-                ans[index] = i - index;
+                int arr_index = stack.pop(); // remove index of temp , for whom we have found a warmer day
+                int arr_value = i - arr_index; // value of resultant array
+                // arr_value => index of day when we find warm temp(i) - index of curr day(stack.peek() / arr_index)
+                arr[arr_index] = arr_value; // value of resultant array stored in respective index 
             }
-            stack.push(i);
+            stack.push(i); // push index of curr temp 
         }
-        return ans;
+        // for all unfilled indexes java automatically fills 0 
+        return arr;
     }
 }
 
@@ -62,20 +82,3 @@ If it is, we pop the stack and calculate how many days it took for a warmer temp
   
 Default answer array: Any day that doesn't have a future warmer day keeps its value as 0.
 (Since Java initializes arrays with 0 by default, all values in ans start as 0)
-
-
-  temp = [70,72,74,70,80]
-** res  = [1,1,2,1,0] ** 
-stack= [4]
-
-for(i = 0;i<n;i++){
-	while(!stack.isEmpty() && temp[stack.peek()] < temp[i]){
-		int index = stack.pop(); 
-    // index -> for index 'index' we have found a temp which is greater that temp[index]
-		// index = 0 , 1 , 3 , 2
-		// i = 1 , 2 , 4 , 4
-		int nextHighDay = i - index;
-		res[index] = nextHighDay;
-	}
-	stack.push(i);
-}
