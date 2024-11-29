@@ -3,45 +3,36 @@ class Solution {
 
         /*
         // 1. Initial approach   
-        for(int i = 0;i < nums.length ;i++){
-            for(int j = 1;j <nums.length ;j++){
-                if(nums[i] + nums[j] == target && i!=j){
-                    int[]res = {i,j};
-                    return res;
-                }
-            }
-        }
-        return null;
-
-        Code run 
-        Issue -> VEry high time complexity 
-        Soln -> remove i!=j , by using j = i+1 in loops && use return new[] int {i,j} 
-
-        // 2. Improved code -:
-           for(int i = 0;i < nums.length ;i++){
-            for(int j = i+1;j <nums.length ;j++){
-                if(nums[i] + nums[j] == target){
-                    return new int[]{i,j};
+        `int n = nums.length;
+        for(int i = 0;i<n;i++){
+            for(int j = 0;j<n;j++){
+                if(nums[i] + nums[j] == target && i != j){
+                    int a[] = new int[]{i,j};
+                    return a;
                 }
             }
         }
         return new int[]{};
+       
         Space -> O(n)
         Time -> O(n2)
 
         //Optimal Soln (HashMap)
 
-        Map<Integer,Integer> map = new HashMap<>();
-        for(int i = 0;i<nums.length;i++){
-            int complement = target - nums[i]; 
-            // nums[i] + complement = target , need to return {complement,nums[i]}
-            if(map.containsKey(complement)){
-                return new int[]{map.get(complement) , i}; 
-                // map.get(complement) ==> returns index in map
+    class Solution {
+        public int[] twoSum(int[] nums, int target) {
+            int n = nums.length;
+            HashMap<Integer,Integer> map = new HashMap<>();
+            for(int i = 0;i<n;i++){
+                int complement = target - nums[i];
+                if(map.containsKey(complement)){
+                    return new int[]{i,map.get(complement)}; // serarch for complement of num[i] in map
+                }
+                map.put(nums[i],i);
             }
-            map.put(nums[i] , i); // put num[i] in ith index of map
+            return new int[]{};
         }
-        return null;
+    }
 
         Time -> O(n);
         Space -> O(n);
