@@ -25,22 +25,31 @@
 
  *****************************************************************/
 
-public class Solution
-{
-    public static Node reverseLinkedList(Node head)
-    {
-        // Write your code here.
-        Node currentHead = head;
-        Node previousHead = null;
-        Node nextHead = null;
-        while(currentHead != null){
-           nextHead = currentHead.next; //currentHead.next points towards nextHead initially
-           currentHead.next = previousHead; // points to null
-           previousHead = currentHead; // points towards currentHead
-           currentHead = nextHead;
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode currNode = head;
+        ListNode prevNode = null;
+        ListNode nextNode = null;
+
+        while(currNode != null){
+            nextNode = currNode.next;
+            currNode.next = prevNode;
+            prevNode = currNode;
+            currNode = nextNode;
         }
-        return previousHead;
+        return prevNode;
     }
+}
 
     
     O(N) time complexity , O(1) space compplexity
